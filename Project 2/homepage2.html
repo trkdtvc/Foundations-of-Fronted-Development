@@ -1,5 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
 
-meow meow meow sadadgisdasdadadgit
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
+    <title>Daut's Pizza</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            color: black;
+        }
 
-sdasdasdasd boze sacuvaj
+        nav {
+            background-color: white;
+            overflow: hidden;
+            text-align: center;
+            box-shadow: 0 2px 4px red;
+        }
+
+        nav a {
+            display: inline-block;
+            color: black;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            background-color: red;
+        }
+
+        header {
+            background-color: red;
+            color: black;
+            text-align: center;
+            padding: 80px 0;
+            box-shadow: 0 4px 8px black;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: #F4CE63;
+            color: black;
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 4px;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #6e1c1b;
+        }
+
+        h1,
+        h2 {
+            color: hsl(60, 100%, 45%);
+        }
+
+        img {
+            display: block;
+            margin: 0 auto;
+            max-width: 80%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        section {
+            padding: 40px;
+            text-align: center;
+            background-color: #fff;
+            margin-bottom: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        section p {
+            max-width: 600px;
+            margin: 0 auto 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0 auto;
+            margin-bottom: 40px;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: hsl(60, 100%, 45%);
+            color: black;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: hsl(0, 100%, 40%);
+        }
+
+        footer {
+            background-color: red;
+            color: black;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        {
+            box-sizing: border-box;
+        }
+
+        .column {
+            float: left;
+            width: 32.8%;
+            padding: 4px;
+        }
+
+        .row::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .gallery img {
+            width: 150px;
+            height: auto;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.1);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .faq-question {
+            cursor: pointer;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .faq-answer {
+            display: none;
+            margin-bottom: 20px;
+        }
+
+         .accordion {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .accordion-item {
+            border-bottom: 1px solid #ddd;
+        }
+        .accordion-header {
+            background-color: #f4f4f4;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .accordion-header:hover {
+            background-color: #e0e0e0;
+        }
+        .accordion-header.active {
+            background-color: #ddd;
+        }
+        .accordion-content {
+            display: none;
+            padding: 10px;
+        }
+        .accordion-content.active {
+            display: block;
+        }
+
+        .dark-theme {
+            background-color: #222;
+            color: orange;
+        }
+
+        .light-theme {
+            background-color: #f7f7f7;
+            color: red;
+        }
+
+        .font-small {
+            font-size: 14px;
+        }
+
+        .font-medium {
+            font-size: 16px;
+        }
+
+        .font-large {
+            font-size: 18px;
+        }
+        .blog-post {
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.blog-post h3 {
+    margin-top: 0;
+}
+
+.blog-post p {
+    margin-bottom: 0;
+}
+
+.comment-box {
+                    border: 1px solid pink;
+                    padding: 10px;
+                    margin: 10px 0;
+                    background-color: pink; 
+                    margin-left: 300px;
+                    margin-right: 320px;
+                    border-radius: 10px;
+                    cursor: pointer;
+                    transition: 1.5s ease;
+                }
+                .comment-box:hover{
+                    transform: scale(0.8);
+                    box-shadow: 0 32px 75px rgba(68, 77, 136, 0.2);
+                }
+                .username {
+                    font-weight: bold;
+                }
+                .timestamp {
+                    color: #888;
+                    font-size: 0.9em;
+                }
+
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#aboutus">About</a>
+        <a href="#menu">Menu</a>
+        <a href="#contact">Contact</a>
+        <a href="#location">Location</a>
+        <button id="toggle-theme">Toggle Theme</button>
+        <button id="decrease-font">Decrease Font Size</button>
+        <button id="increase-font">Increase Font Size</button>
+    </nav>
+
+    <header>
+        <h1>Welcome to the official website of Daut's Pizza</h1>
+    </header>
+
+    
+
+    <section class="gallery">
+        <img src="pizza_delivery_spider_man_by_aandygp_dchr6jo-fullview.jpg" alt="Thumbnail 1" class="thumbnail" data-full="pizza_delivery_spider_man_by_aandygp_dchr6jo-fullview.jpg">
+        <img src="ccwfqxvqnut91.png" alt="Thumbnail 2" class="thumbnail" data-full="ccwfqxvqnut91.png">
+        <img src="tmnt1.webp" alt="Thumbnail 3" class="thumbnail" data-full="tmnt1.webp">
+    
+    </section>
+
+    <section id="aboutus">
+        <h2>ABOUT US</h2>
+        <p>We are a traditional pizzeria established in 1878 by Nermin Dautovic.</p>
+        <p>We have been operating for decades and supplying our customers with the most delicious crust, cheese and tomato sauce topped pizzas in the world.</p>
+        <p>We are always on the lookout for delivering the most amazing pizza experience to our most loyal customers.</p>
+        <p>Come and have the greatest pizza experience of your life.</p>
+        <p>We are looking forward to your visit.</p>
+    </section>
+
+    <section id="menu">
+        <h2>MENU</h2>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Ingredients</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Margharita</td>
+                    <td>Crust, cheese, tomato sauce</td>
+                    <td>9.99$</td>
+                </tr>
+                <tr>
+                    <td>Funghi</td>
+                    <td>Crust, cheese, tomato sauce, mushrooms</td>
+                    <td>11.99$</td>
+                </tr>
+                <tr>
+                    <td>Pepperoni</td>
+                    <td>Crust, cheese, tomato sauce, beef pepperoni</td>
+                    <td>13.99$</td>
+                </tr>
+                <tr>
+                    <td>Pineapple</td>
+                    <td>Crust, cheese, pineapples</td>
+                    <td>17.99$</td>
+                </tr>
+                <tr>
+                    <td>Mexicana</td>
+                    <td>Crust, cheese, tomato sauce, vegetables</td>
+                    <td>19.99$</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="contact">
+        <h2>CONTACT</h2>
+        <p>If you have any inquiries about the food we sell, write to us below.</p>
+        <form id="contact-form" action="#" method="post">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="date">Preferred Date:</label>
+            <input type="date" id="date" name="date" class="datepicker" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <div id="password-strength"></div>
+            <input type="submit" value="Submit">
+        </form>
+    </section>
+
+    
+
+    <section id="faq">
+        <h2>FAQ</h2>
+        <div class="faq-item">
+            <p class="faq-question">What are your opening hours?</p>
+            <p class="faq-answer">We are open from 10 AM to 11 PM every day.</p>
+        </div>
+        <div class="faq-item">
+            <p class="faq-question">Do you offer vegan options?</p>
+            <p class="faq-answer">Yuck.</p>
+        </div>
+        <div class="faq-item">
+            <p class="faq-question">Do you have gluten-free crust?</p>
+            <p class="faq-answer">No.</p>
+        </div>
+        
+    </section>
+
+    <div id="comments-container"></div>
+
+    <section id="location">
+        <h2>LOCATION</h2>
+        <a href="https://www.google.com/search?sca_esv=4c2af5c383b2b4e0&sca_upv=1&sxsrf=ADLYWILmsDHdhdEqgnNKLFoEMvKj_T4gpQ:1717339957841&q=gracanica&uds=ADvngMiACXnSrunEWTJhRSUal9RUwUrg7PJzCCx8r56EnqLIbMqfZ3CjN33PShNetE6eIeYaFwYac2fan5q0d2i5OdDdRYTbi9n2ryQhvQToVUp4KzOYDzwpfF_9cKGqpwQ0RDnOU9bEGyrD2FL0rNdjCBeUhCdbx5oudcgTcv2Nt4d0hzpDix2R8V1k4yJEm6cPtk59OHSiyZsL4k7gWEDEl4DnuRH7FSRzZVDeI6s4Ckdhopqr1WCaNIKYNLuEolmLrO7XaIeEL7vRmPSIy9yrk4PxzTYy85o0BdRoQb7yL8uBO1tgnKxRLDeASBTP-umWNRb-25UC&udm=2&prmd=imvnsbtz&sa=X&ved=2ahUKEwjAhpTxlb2GAxWggf0HHRSlATsQtKgLegQIERAB&biw=1920&bih=945&dpr=1">View More</a>
+        <p>Gracanickih Gazija, Gracanica 75320</p>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2836.393851241972!2d18.297154076671582!3d44.691157384683585!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x475e9e5a70cfe6ef%3A0xd5e20e2d06aae651!2sRevizija%20Dautovi%C4%87%20d.o.o.!5e0!3m2!1sen!2sba!4v1711749285049!5m2!1sen!2sba" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </section>
+
+   
+    <footer>
+        <p>&copy; 2024 Daut's Pizza. All rights reserved.</p>
+    </footer>
+
+    
+    <div id="modal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modal-img">
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('modal');
+            const modalImg = document.getElementById('modal-img');
+            const closeBtn = document.getElementsByClassName('close')[0];
+
+            document.querySelectorAll('.thumbnail').forEach(img => {
+                img.addEventListener('click', function() {
+                    modal.style.display = "flex";
+                    modalImg.src = this.dataset.full;
+                });
+            });
+
+            closeBtn.addEventListener('click', function() {
+                modal.style.display = "none";
+            });
+
+            modal.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    modal.style.display = "none";
+                }
+            });
+
+            
+            document.querySelectorAll('.faq-question').forEach(question => {
+                question.addEventListener('click', function() {
+                    const answer = this.nextElementSibling;
+                    answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+                });
+            });
+        });
+
+        function toggleTheme() {
+            document.body.classList.toggle('dark-theme');
+            
+        }
+
+        
+        function increaseFontSize() {
+            document.body.classList.remove('font-small');
+            document.body.classList.remove('font-medium');
+            document.body.classList.add('font-large');
+        }
+
+        
+        function decreaseFontSize() {
+            document.body.classList.remove('font-large');
+            document.body.classList.remove('font-medium');
+            document.body.classList.add('font-small');
+        }
+
+        
+        document.getElementById('toggle-theme').addEventListener('click', toggleTheme);
+        document.getElementById('increase-font').addEventListener('click', increaseFontSize);
+        document.getElementById('decrease-font').addEventListener('click', decreaseFontSize);
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script>
+        $(document).ready(function () {
+    $('#contact-form').validate({
+        rules: {
+            name: {
+                required: true
+            },
+            email: {
+                required: true,
+                email: true
+            },
+            date: {
+                required: true
+            },
+            password: {
+                required: true,
+                minlength: 8 
+            }
+        },
+        messages: {
+            name: {
+                required: "Please enter your name"
+            },
+            email: {
+                required: "Please enter your email",
+                email: "Please enter a valid email address"
+            },
+            date: {
+                required: "Please select a date"
+            },
+            password: {
+                required: "Please enter a password",
+                minlength: "Password must be at least 8 characters long"
+            }
+        },
+        submitHandler: function (form) {
+            
+            var formData = $(form).serialize();
+
+            
+            $.ajax({
+                type: 'POST',
+                url: 'save_data.php', 
+                data: formData,
+                success: function (response) {
+                    
+                    toastr.success('Your data has been successfully saved.');
+
+                    
+                    form.reset();
+                },
+                error: function (xhr, status, error) {
+                    
+                    toastr.error('An error occurred while saving data.');
+
+                    console.error(xhr.responseText);
+                }
+            });
+        }
+    });
+
+    
+    $('#password').on('keyup', function () {
+        var password = $(this).val();
+        var strength = 0;
+
+        
+        if (password.length >= 8) {
+            strength += 1;
+        }
+        if (password.match(/[a-z]/)) {
+            strength += 1;
+        }
+        if (password.match(/[A-Z]/)) {
+            strength += 1;
+        }
+        if (password.match(/[0-9]/)) {
+            strength += 1;
+        }
+        if (password.match(/[$&+,:;=?@#|'<>.^*()%!-]/)) {
+            strength += 1;
+        }
+
+        
+        var output = "";
+        switch (strength) {
+            case 0:
+            case 1:
+                output = "Weak";
+                break;
+            case 2:
+                output = "Moderate";
+                break;
+            case 3:
+                output = "Good";
+                break;
+            case 4:
+                output = "Strong";
+                break;
+            case 5:
+                output = "Very Strong";
+                break;
+            default:
+                output = "Weak";
+                break;
+        }
+
+        $('#password-strength').text("Password Strength: " + output);
+    });
+});
+
+    </script>
+    <script>
+        function loadComments() {
+            const comments = [
+                {
+                    "username": "Bosko Buha",
+                    "comment": "Odlicna pica bajo",
+                    "timestamp": 19245551
+                },
+                {
+                    "username": "Timmy",
+                    "comment": "Perfekcija brate.",
+                    "timestamp": 1231414124
+                },
+                {
+                    "username": "Stefan",
+                    "comment": "Bravo majstore",
+                    "timestamp": 91293172391
+                }
+            ];
+            const commentsContainer = document.getElementById('comments-container');
+            comments.forEach(comment => {
+                const commentBox = document.createElement('div');
+                commentBox.className = 'comment-box';
+
+                const username = document.createElement('div');
+                username.className = 'username';
+                username.textContent = comment.username;
+
+                const commentText = document.createElement('div');
+                commentText.className = 'comment';
+                commentText.textContent = comment.comment;
+
+                const timestamp = document.createElement('div');
+                timestamp.className = 'timestamp';
+                timestamp.textContent = new Date(comment.timestamp).toLocaleString();
+
+                commentBox.appendChild(username);
+                commentBox.appendChild(commentText);
+                commentBox.appendChild(timestamp);
+
+                commentsContainer.appendChild(commentBox);
+            });
+        }
+        loadComments();
+    </script>
+    
+    
+</body>
+
+</html>
