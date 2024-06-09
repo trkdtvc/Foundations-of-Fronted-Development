@@ -7,6 +7,32 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <link rel="stylesheet" href="style.css">
+
+    <style>
+        .comment-box {
+        border: 1px solid pink;
+        padding: 10px;
+        margin: 10px 0;
+        background-color: pink; 
+        margin-left: 300px;
+        margin-right: 320px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 1.5s ease;
+    }
+    .comment-box:hover{
+        transform: scale(0.8);
+        box-shadow: 0 32px 75px rgba(68, 77, 136, 0.2);
+    }
+    .username {
+        font-weight: bold;
+    }
+    .timestamp {
+        color: #888;
+        font-size: 0.9em;
+    }
+    </style>
+    
 </head>
 
 <body class="light-theme">
@@ -70,7 +96,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Escape the Matrix Neo.</h5>
                         <p class="card-text">Resist the slave mind.</p>
-                        <a href="#" class="btn btn-primary">Learn more</a>
+                        <a href="https://www.tailopez.com/" class="btn btn-primary">Learn more</a>
                     </div>
                 </div>
             </div>
@@ -80,7 +106,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Agent Smith is after you...</h5>
                         <p class="card-text">He is in everyone around you.</p>
-                        <a href="#" class="btn btn-primary">Learn more</a>
+                        <a href="https://www.tailopez.com/" class="btn btn-primary">Learn more</a>
                     </div>
                 </div>
             </div>
@@ -90,7 +116,7 @@
                     <div class="card-body">
                         <h5 class="card-title">This is your last chance to break free...</h5>
                         <p class="card-text">I want to break free!</p>
-                        <a href="#" class="btn btn-primary">Learn more</a>
+                        <a href="https://www.tailopez.com/" class="btn btn-primary">Learn more</a>
                     </div>
                 </div>
             </div>
@@ -110,17 +136,25 @@
         <h2>Gallery</h2>
         <div class="row gallery">
             <div class="col-md-4">
-                <img src="stevenSeagal.jpg"  class="thumbnail">
+                <img src="stevenSeagal.jpg" class="thumbnail" onclick="openModal('stevenSeagal.jpg')">
             </div>
             <div class="col-md-4">
-                <img src="arnold.jpg"  class="thumbnail">
+                <img src="arnold.jpg" class="thumbnail" onclick="openModal('arnold.jpg')">
             </div>
             <div class="col-md-4">
-                <img src="chuck.jpg"  class="thumbnail">
+                <img src="chuck.jpg" class="thumbnail" onclick="openModal('chuck.jpg')">
             </div>
         </div>
         <a href="index2.html" class="btn btn-primary mt-4">View more</a> 
     </div>
+    
+
+    <div id="myModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="img01">
+        <div id="caption"></div>
+    </div>
+    
     
     <div id="faqs" class="container mt-4">
         <h2>FAQ's</h2>
@@ -176,6 +210,8 @@
         <a href="novi.html" class="btn btn-primary mt-4">Subscribe</a> 
     </div>
 
+    <div id="comments-container"></div>
+
     <footer class="container mt-4">
         <div class="row">
             <div class="text-center mt-4">
@@ -217,7 +253,7 @@
             const themeToggle = document.getElementById('theme-toggle');
             const body = document.body;
 
-            // Check if a theme is already set in local storage
+            
             const currentTheme = localStorage.getItem('theme') || 'light';
             body.classList.add(currentTheme + '-theme');
             if (currentTheme === 'dark') {
@@ -239,5 +275,69 @@
             });
         });
     </script>
+    <script>
+        function openModal(imageSrc) {
+            var modal = document.getElementById('myModal');
+            var modalImg = document.getElementById("img01");
+            var captionText = document.getElementById("caption");
+            modal.style.display = "block";
+            modalImg.src = imageSrc;
+            
+        }
+    
+        var closeBtn = document.getElementsByClassName("close")[0];
+        closeBtn.onclick = function() {
+            var modal = document.getElementById('myModal');
+            modal.style.display = "none";
+        }
+    
+        window.onclick = function(event) {
+            var modal = document.getElementById('myModal');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+<script>
+    function loadComments() {
+        const comments = [
+            {
+                "username": "Mirza Agic",
+                "comment": "Exellent site!",
+                "timestamp": 81823617231
+            },
+            {
+                "username": "Kasim Besic",
+                "comment": "Meow!",
+                "timestamp": 173731827381
+            }
+        ];
+        const commentsContainer = document.getElementById('comments-container');
+        comments.forEach(comment => {
+            const commentBox = document.createElement('div');
+            commentBox.className = 'comment-box';
+
+            const username = document.createElement('div');
+            username.className = 'username';
+            username.textContent = comment.username;
+
+            const commentText = document.createElement('div');
+            commentText.className = 'comment';
+            commentText.textContent = comment.comment;
+
+            const timestamp = document.createElement('div');
+            timestamp.className = 'timestamp';
+            timestamp.textContent = new Date(comment.timestamp).toLocaleString();
+
+            commentBox.appendChild(username);
+            commentBox.appendChild(commentText);
+            commentBox.appendChild(timestamp);
+
+            commentsContainer.appendChild(commentBox);
+        });
+    }
+    loadComments();
+</script>
+    
 </body>
 </html>
