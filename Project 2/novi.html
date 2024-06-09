@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Newsletter</title>
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet" />
+    <link href="styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+    <style>
+        .error {
+            border: 2px solid red;
+        }
+        .success {
+            border: 2px solid green;
+        }
+        .error-message {
+            color: red;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+        .success-message {
+            color: green;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+        .toggle-checkbox {
+            display: none;
+        }
+        .toggle-label {
+            cursor: pointer;
+            padding: 10px;
+            background-color: #ddd;
+            border-radius: 4px;
+            display: inline-block;
+        }
+        .theme-switcher {
+            margin-top: 30px;
+        }
+        .dark-theme .bg-image {
+            background-color:#22110B !important;
+        }
+        .popup {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 2px;
+            padding: 16px;
+            position: fixed;
+            z-index: 1;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .popup.show {
+            visibility: visible;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+        .popup.success {
+            background-color: green;
+        }
+        .popup.error {
+            background-color: red;
+        }
+        @keyframes fadein {
+            from {bottom: 0; opacity: 0;} 
+            to {bottom: 30px; opacity: 1;}
+        }
+        @keyframes fadeout {
+            from {bottom: 30px; opacity: 1;} 
+            to {bottom: 0; opacity: 0;}
+        }
+    </style>
+</head>
+<body class="light-theme">
+    <div class="attr-nav">
+    </div>
+    <div class="bg-image faq bg-faded p-5 rounded" style="width: 900px; align-items: center; justify-content: center; margin-left: 300px; margin-top: 20px;">
+        <div class="container">
+            <style>
+                .container {
+                    margin: 20px;
+                }
+                button {
+                    margin-right: 10px;
+                    border-radius: 20px;
+                    background-color: #D2B48C;
+                    color: white;
+                    border: none;
+                    padding: 10px 20px;
+                }
+            </style>
+            <div class="container">
+                <p><strong>Customer Name:</strong> <span id="customerName">Tarik</span></p>
+                <p><strong>Customer Surname:</strong> <span id="customerSurname">Daut</span></p>
+                <button id="editBtn">Edit</button>
+                <button id="deleteBtn">Delete</button>
+            </div>
+            <div class="row">
+                <div class="col-2"></div>
+                <div class="col-8 mt-5 text-center" id="form">
+                    <form id="contactForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName" style="color: white;">First Name</label>
+                                <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First name" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName" style="color: white;">Last Name</label>
+                                <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last name" required />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" style="color: white;">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required />
+                        </div>
+                        <div class="form-group" style="color: white;">
+                            <label for="email" style="color: white;">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Email" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="phone" style="color: white;">Phone</label>
+                            <input type="tel" class="form-control" id="phone" name="phone" placeholder="Phone" />
+                        </div>
+                        <div class="form-group">
+                            <label for="address" style="color: white;">Address</label>
+                            <input type="text" class="form-control" id="address" name="address" placeholder="Address" />
+                        </div>
+                        <div class="form-group">
+                            <label for="nation" style="color: white;">Nation</label>
+                            <input type="text" class="form-control" id="nation" name="nation" placeholder="Nation" />
+                        </div>
+                        <div class="form-group">
+                            <label for="birthdate" style="color: white;">Date of Birth</label>
+                            <input type="date" class="form-control" id="birthdate" name="birthdate" placeholder="Date of Birth" />
+                        </div>
+                        <div class="form-group">
+                            <label for="passwordStrength" style="color: grey;">Password Strength</label>
+                            <meter max="4" id="passwordStrength" value="0"></meter>
+                        </div>
+                        <button type="submit" class="btn btn-dark">Submit</button>
+                    </form>
+                </div>
+                <div class="col-2"></div>
+            </div>
+        </div>
+    </div>
+    <div id="popup" class="popup"></div>
+
+    <div id="comments-container"></div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            function showPopup(message, type) {
+                const popup = $('#popup');
+                popup.removeClass('success error').addClass(type).text(message).addClass('show');
+                setTimeout(function() {
+                    popup.removeClass('show');
+                }, 3000);
+            }
+
+            $('#editBtn').on('click', function () {
+                $('#firstName').val($('#customerName').text());
+                $('#lastName').val($('#customerSurname').text());
+            });
+
+            $('#deleteBtn').on('click', function () {
+                const confirmDelete = confirm("Are you sure you want to delete this customer?");
+                if (confirmDelete) {
+                    $('#contactForm')[0].reset();
+                    $('#firstName').val('');
+                    $('#lastName').val('');
+                    $('#customerName').text('');
+                    $('#customerSurname').text('');
+
+                    showPopup('Customer deleted successfully!', 'success');
+                }
+            });
+
+            $('#contactForm').validate({
+                rules: {
+                    firstName: 'required',
+                    lastName: 'required',
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    password: {
+                        required: true,
+                        minlength: 8
+                    },
+                    birthdate: {
+                        required: true,
+                        date: true
+                    }
+                },
+                messages: {
+                    firstName: 'Please enter your first name',
+                    lastName: 'Please enter your last name',
+                    email: 'Please enter a valid email address',
+                    password: {
+                        required: 'Please provide a password',
+                        minlength: 'Your password must be at least 8 characters long'
+                    },
+                    birthdate: 'Please enter your date of birth in mm/dd/yyyy format'
+                },
+                errorPlacement: function (error, element) {
+                    error.addClass('error-message');
+                    element.addClass('error');
+                    element.removeClass('success');
+                    error.insertAfter(element);
+                },
+                success: function (label, element) {
+                    $(element).addClass('success');
+                    $(element).removeClass('error');
+                    $(label).removeClass('error-message');
+                    $(label).addClass('success-message');
+                },
+                submitHandler: function (form, event) {
+                    event.preventDefault();
+
+                    $('#customerName').text($('#firstName').val());
+                    $('#customerSurname').text($('#lastName').val());
+
+                    showPopup('Form submitted successfully!', 'success');
+                }
+            });
+
+           
+
+            $('#password').on('input', function () {
+                var password = $(this).val();
+                var strength = 0;
+
+                if (password.length >= 8) {
+                    strength += 1;
+                }
+                if (password.match(/[A-z]/)) {
+                    strength += 1;
+                }
+                if (password.match(/[A-Z]/)) {
+                    strength += 1;
+                }
+                if (password.match(/\d/)) {
+                    strength += 1;
+                }
+
+                $('#passwordStrength').val(strength);
+            });
+        });
+    </script>
+</body>
+</html>
+ 
