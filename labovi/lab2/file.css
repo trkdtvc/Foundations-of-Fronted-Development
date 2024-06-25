@@ -1,0 +1,79 @@
+body{
+    background-color: #85AFD4;
+    font-family: 'Lato', sans-serif;
+    color: white;
+}
+
+.body2 {
+    background-color: #85AFD4;
+    font-family: 'Lato', sans-serif;
+    color: white;
+    text-align: center;
+}
+
+a {
+    font-weight: bold;
+}
+
+.header{
+    margin-left: 600px;
+    margin-bottom: 50px;
+    font-weight: bold;
+}
+
+.loading{
+    margin-left: 500px;
+    font-weight: bold;
+}
+
+.welcome{
+    margin-left: 500px; 
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.login{
+    margin-left: 500px; 
+    font-size: 17px;
+    margin-top: -10px;
+    font-weight: bold;
+}
+
+.main{
+    margin-left: 500px;
+    font-size: 20px; 
+    font-weight: bold;
+}
+
+.enter{
+    margin-left: 500px; 
+    width: 520px; 
+    height: 50px; 
+    margin-top: -15px; 
+    margin-bottom: 20px; 
+    font-size: 15px;
+    
+}
+
+.acc{
+    margin-left: 625px; 
+    font-size: 18px;
+    color: white;
+}
+
+.forgot{
+    margin-left: 690px; 
+    font-size: 16px;
+    color: white;
+}
+
+.submit{
+    margin-left: 590px; 
+    width: 350px; height: 
+    50px; font-size: 20px; 
+    font-weight: bold;
+    background-color: #E47272;
+    border: #E47272;
+    color: white;
+    border-radius: 20px;
+}
