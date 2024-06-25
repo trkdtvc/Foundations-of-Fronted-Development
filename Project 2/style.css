@@ -65,15 +65,13 @@ footer {
     padding: 30px 0;
 }
 
-/* style.css */
 
-/* Default light theme */
 body.light-theme {
     background-color: white;
     color: black;
 }
 
-/* Dark theme */
+
 body.dark-theme {
     background-color: black;
     color: white;

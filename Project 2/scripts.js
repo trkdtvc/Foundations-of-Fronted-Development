@@ -104,7 +104,7 @@ $(document).ready(function() {
         const themeToggle = document.getElementById('theme-toggle');
         const body = document.body;
 
-        // Check if a theme is already set in local storage
+        
         const currentTheme = localStorage.getItem('theme') || 'light';
         body.classList.add(currentTheme + '-theme');
         if (currentTheme === 'dark') {
