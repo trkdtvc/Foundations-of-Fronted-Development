@@ -1,20 +1,23 @@
 
-import React from 'react';
-import { Typography, Card, CardContent } from '@mui/material';
+import React from "react";
+import batman from '../components/assets/batman.jpg';
 
-const Home = () => {
+function Home() {
   return (
-    <Card>
-      <CardContent>
-        <Typography variant="h4" gutterBottom>
-          Home Page
-        </Typography>
-        <Typography variant="body1">
-          Welcome to the Home Page!
-        </Typography>
-      </CardContent>
-    </Card>
+    <div style={{
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      height: "100vh"
+    }}>
+      <h1 style={{
+        fontSize: "3em",
+        textAlign: "center",
+        transition: "transform 0.3s ease-in-out"
+      }}>POZZ, DOBRODOSLI NA DANASNJU EMISIJU CIKA SISMIS SPASAVA GRAD</h1>
+      <img src={batman} alt="Burch" className="about-image" />
+    </div>
   );
-};
+}
 
 export default Home;
